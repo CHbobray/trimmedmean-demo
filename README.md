@@ -231,5 +231,5 @@ the assignment description, the instructor's `run-bootstrap-robust.R` and its sa
 listing. Claude designed and wrote the program, tests, comparison scripts, and README;
 ran the Go program and R side by side to confirm the results match; ported the R
 bootstrap study to Go and ran it with B = 100 and B = 1,000; and timed both versions.
-I reviewed the code and results. The conversation log is included in this repository as
-`genai-log.md` (or linked here).
+I reviewed the code and results. The full conversation log is available at
+[https://claude.ai/share/9448bf64-cd2d-49c9-b7c8-85bf1a67f41c](https://claude.ai/share/9448bf64-cd2d-49c9-b7c8-85bf1a67f41c).
