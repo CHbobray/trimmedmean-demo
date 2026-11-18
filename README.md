@@ -160,6 +160,38 @@ terminal (`trimmedmean-demo.exe -h` on Windows, `./trimmedmean-demo-mac -h` on m
 On macOS, if Gatekeeper blocks an unsigned binary, run
 `xattr -d com.apple.quarantine trimmedmean-demo-mac` once.
 
+### macOS .app bundle (optional)
+
+This is a command-line program, so a plain executable is the natural form on macOS.
+If you want a double-clickable `.app`, wrap the binary in a bundle that opens it in
+Terminal:
+
+```bash
+GOOS=darwin GOARCH=arm64 go build -o trimmedmean-demo-mac .
+mkdir -p TrimmedMeanDemo.app/Contents/MacOS
+cp trimmedmean-demo-mac TrimmedMeanDemo.app/Contents/MacOS/trimmedmean-demo
+cat > TrimmedMeanDemo.app/Contents/MacOS/launch <<'SH'
+#!/bin/bash
+DIR="$(cd "$(dirname "$0")" && pwd)"
+open -a Terminal "$DIR/trimmedmean-demo"
+SH
+chmod +x TrimmedMeanDemo.app/Contents/MacOS/launch
+cat > TrimmedMeanDemo.app/Contents/Info.plist <<'PLIST'
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>CFBundleName</key><string>TrimmedMeanDemo</string>
+  <key>CFBundleIdentifier</key><string>com.chbobray.trimmedmeandemo</string>
+  <key>CFBundleExecutable</key><string>launch</string>
+  <key>CFBundlePackageType</key><string>APPL</string>
+  <key>CFBundleVersion</key><string>0.1.1</string>
+</dict></plist>
+PLIST
+```
+
+Double-clicking `TrimmedMeanDemo.app` opens a Terminal window and runs the program with
+its default settings; the generated `data/` folder is written to your home directory.
+
 ## Testing and profiling
 
 ```bash
@@ -169,9 +201,12 @@ go run . -bootstrap -cpuprofile cpu.prof -memprofile mem.prof
 go tool pprof -top cpu.prof
 ```
 
-Tests cover the median and standard deviation helpers (checked against R's `median()` and
-`sd()`), exact CSV round-trips, rejection of bad input files and bad trimming flags, and
-reproducibility of the bootstrap study for a fixed seed. The package itself has its own
+Tests (83% statement coverage) cover the median and standard deviation helpers (checked
+against R's `median()` and `sd()`), exact CSV round-trips, every run mode (generated
+samples, a user data file with asymmetric trimming, the bootstrap study with CPU and
+memory profiles), rejection of invalid input (bad files, out-of-range trims, too few
+resamples, unwritable profile paths), and reproducibility of the bootstrap study for a
+fixed seed. The package itself has its own
 tests in its repository.
 
 ## Files
@@ -181,7 +216,8 @@ tests in its repository.
 | `main.go` | command-line flags, input validation, the R-comparison run, profiling and logging |
 | `data.go` | generating samples (contaminated normal mixture, integers with outliers), reading and writing CSV |
 | `bootstrap.go` | the bootstrap study, plus `median` and `standardDeviation` helpers |
-| `main_test.go` | unit tests and benchmark |
+| `main_test.go` | unit tests of the helpers, and the bootstrap benchmark |
+| `run_test.go` | tests of each run mode and of invalid-input handling |
 | `compare.R` | R's `mean(x, trim = 0.05)` on the saved samples |
 | `crosscheck.sh` | Go vs R on 80 samples of varying size |
 | `run-bootstrap-robust.R` | the instructor's R study (Thomas W. Miller, 2024), for comparison |
