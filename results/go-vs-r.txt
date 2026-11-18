@@ -1,0 +1,7 @@
+Go trimmed mean results (seed 9999, trim [0.05])
+  integers data/ints.csv  n = 100  mean = 215.1000000000  trimmed mean = 59.1111111111
+  floats   data/floats.csv  n = 100  mean = 101.6331992242  trimmed mean = 99.7898634777
+
+R trimmed mean results (trim 0.05 )
+  integers data/ints.csv  n = 100  mean = 215.1000000000  trimmed mean = 59.1111111111
+  floats   data/floats.csv  n = 100  mean = 101.6331992242  trimmed mean = 99.7898634777

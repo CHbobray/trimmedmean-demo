@@ -1,0 +1,7 @@
+go.work
+go.work.sum
+*.prof
+*.test
+/trimmedmean-demo
+*.exe
+trimmedmean-demo-mac*

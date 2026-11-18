@@ -1,0 +1,41 @@
+
+Study conditions:
+  Main population mean: 100 SD: 10
+  Outlier mean: 200 SD: 1
+  Probability of outliers: 0.01
+
+Trimmed mean computed with trimming proportion 0.05
+
+Estimated standard errors using 1000 bootstrap samples (100 iterations, seed 9999)
+
+Samples of size n = 25
+  SE Mean from Central Limit Theorem (assuming no outliers): 2.00
+  SE Mean from Samples (with outliers): 2.72
+  SE Mean from Bootstrap Samples (with outliers): 2.73
+  SE Median from Bootstrap Samples (with outliers): 2.30
+  SE Trimmed Mean from Bootstrap Samples (with outliers): 2.36
+  Classic within-sample bootstrap SE (average over iterations): mean 2.52, median 2.70, trimmed mean 2.44
+
+Samples of size n = 100
+  SE Mean from Central Limit Theorem (assuming no outliers): 1.00
+  SE Mean from Samples (with outliers): 1.49
+  SE Mean from Bootstrap Samples (with outliers): 1.49
+  SE Median from Bootstrap Samples (with outliers): 1.27
+  SE Trimmed Mean from Bootstrap Samples (with outliers): 1.12
+  Classic within-sample bootstrap SE (average over iterations): mean 1.37, median 1.27, trimmed mean 1.08
+
+Samples of size n = 225
+  SE Mean from Central Limit Theorem (assuming no outliers): 0.67
+  SE Mean from Samples (with outliers): 0.91
+  SE Mean from Bootstrap Samples (with outliers): 0.91
+  SE Median from Bootstrap Samples (with outliers): 0.82
+  SE Trimmed Mean from Bootstrap Samples (with outliers): 0.74
+  Classic within-sample bootstrap SE (average over iterations): mean 0.96, median 0.86, trimmed mean 0.70
+
+Samples of size n = 400
+  SE Mean from Central Limit Theorem (assuming no outliers): 0.50
+  SE Mean from Samples (with outliers): 0.69
+  SE Mean from Bootstrap Samples (with outliers): 0.68
+  SE Median from Bootstrap Samples (with outliers): 0.57
+  SE Trimmed Mean from Bootstrap Samples (with outliers): 0.45
+  Classic within-sample bootstrap SE (average over iterations): mean 0.69, median 0.66, trimmed mean 0.52

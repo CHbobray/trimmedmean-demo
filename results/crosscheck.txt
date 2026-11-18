@@ -1,0 +1,3 @@
+Compared 80 samples (40 integer, 40 float), n from 137 to 1580
+Largest |Go - R| at 10 decimal places: 0
+All Go results match R.
